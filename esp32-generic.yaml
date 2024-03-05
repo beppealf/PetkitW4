@@ -24,7 +24,7 @@ ota:
 improv_serial:
 
 dashboard_import:
-  package_import_url: github://esphome/firmware/bluetooth-proxy/esp32-generic.yaml@main
+  package_import_url: github://beppealf/PetkitW4/esp32-generic.yaml@main
 
 esp32_ble_tracker:
   scan_parameters:
