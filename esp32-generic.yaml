@@ -40,3 +40,45 @@ button:
   - platform: safe_mode
     name: Safe Mode Boot
     entity_category: diagnostic
+
+spi:
+  clk_pin: 18
+  mosi_pin: 23
+
+font:
+  - file: "Ldfcomicsans-jj7l.ttf"
+    id: font_cs
+    size: 20
+  - file: "arial_th.ttf"
+    id: font_arth
+    size: 16
+    
+sensor:
+  - platform: homeassistant
+    entity_id: sensor.h5102_d7eb_temperature
+    id: h5102_d7eb_temperature
+  - platform: homeassistant
+    entity_id: sensor.outdoor_humidity
+    id: outdoor_humidity
+  - platform: homeassistant
+    entity_id: sensor.kitchen_temperature
+    id: kitchen_temperature
+
+
+display:
+  - platform: waveshare_epaper
+    cs_pin: 5
+    dc_pin: 17
+    busy_pin: 4
+    reset_pin: 16
+    model: 2.13in-ttgo-b74
+    update_interval: 300s
+    rotation: 270
+    lambda: |-
+      it.print(0, 0, id(font_cs), "Esterno:");
+      it.printf(0, 42, id(font_arth), "Temp:");
+      it.printf(55, 40, id(font_cs), "%.1fc", id(h5102_d7eb_temperature).state);
+      it.printf(0, 62, id(font_arth), "Hum:");
+      it.printf(55, 60, id(font_cs), "%.1f%%", id(outdoor_humidity).state);      
+      it.printf(0, 82, id(font_arth), "Temp:");
+      it.printf(55, 80, id(font_cs), "%.1fc", id(kitchen_temperature).state); 
