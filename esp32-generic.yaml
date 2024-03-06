@@ -33,6 +33,18 @@ esp32_ble_tracker:
     # enable the built-in coexistence logic in ESP-IDF
     active: true
 
+ble_client:
+  - mac_address: A4:C1:38:1C:CF:2F
+    id: ble_itag
+    on_connect:
+      then:
+        - lambda: |-
+            ESP_LOGD("ble_client_lambda", "Connected to BLE device");
+    on_disconnect:
+      then:
+        - lambda: |-
+            ESP_LOGD("ble_client_lambda", "Disconnected from BLE device");
+
 bluetooth_proxy:
   active: true
 
